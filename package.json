@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "lambda-auth0-authenticator": "git+https://github.com/auth0-samples/jwt-rsa-aws-custom-authorizer.git"
+  }
+}

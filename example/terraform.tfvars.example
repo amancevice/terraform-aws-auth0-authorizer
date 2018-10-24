@@ -1,0 +1,7 @@
+authorizer_audience     = "https://<your-api-audience>/"
+authorizer_jwks_uri     = "https://your-tenant.auth0.com/.well-known/jwks.json"
+authorizer_token_issuer = "https://your-tenant.auth0.com/"
+aws_access_key_id       = "<aws-access-key-id>"
+aws_profile             = "<aws-profile>"
+aws_region              = "<aws-region>"
+aws_secret_access_key   = "<aws-secret-access-key>"
