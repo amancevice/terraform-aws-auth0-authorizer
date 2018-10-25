@@ -10,20 +10,15 @@ output lambda_name {
 
 output lambda_role_arn {
   description = "Lambda role ARN."
-  value       = "${aws_iam_role.lambda_role.arn}"
+  value       = "${aws_iam_role.role.arn}"
 }
 
 output lambda_role_name {
   description = "Lambda role name."
-  value       = "${aws_iam_role.lambda_role.name}"
+  value       = "${aws_iam_role.role.name}"
 }
 
-output invoke_role_arn {
-  description = "Lambda role ARN."
-  value       = "${aws_iam_role.invoke_role.arn}"
-}
-
-output invoke_role_name {
-  description = "Lambda role name."
-  value       = "${aws_iam_role.invoke_role.name}"
+output lambda_role_policy_arns {
+  description = "Lambda role policy ARNs."
+  value       = ["${aws_iam_role_policy_attachment.lambda_policies.*.policy_arn}"]
 }

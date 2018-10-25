@@ -15,16 +15,6 @@ variable cloudwatch_log_group_retention_in_days {
   default     = 30
 }
 
-variable invoke_role_name {
-  description = "Lambda invocation role."
-  default     = "auth0-authorizer-invoke"
-}
-
-variable invoke_role_path {
-  description = "Lambda invocation role path."
-  default     = "/"
-}
-
 variable lambda_function_name {
   description = "Lambda function name."
   default     = "auth0-authorizer"
