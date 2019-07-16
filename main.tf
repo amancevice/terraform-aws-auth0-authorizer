@@ -3,7 +3,7 @@ data aws_iam_policy_document assume_role {
     actions = ["sts:AssumeRole"]
 
     principals {
-      type        = "Service"
+      type = "Service"
       identifiers = [
         "apigateway.amazonaws.com",
         "lambda.amazonaws.com",
@@ -31,7 +31,7 @@ resource aws_lambda_function lambda {
   handler          = "index.handler"
   memory_size      = "${var.lambda_memory_size}"
   role             = "${aws_iam_role.role.arn}"
-  runtime          = "nodejs8.10"
+  runtime          = "nodejs10.x"
   source_code_hash = "${base64sha256(file("${path.module}/package.zip"))}"
   tags             = "${var.lambda_tags}"
   timeout          = "${var.lambda_timeout}"

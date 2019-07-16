@@ -8,6 +8,9 @@
 # .tfvars files
 *.tfvars
 
-# node
-.env
-node_modules/
+# module
+**/.docker/
+**/node_modules/
+*.env
+*.zip
+!package.zip
