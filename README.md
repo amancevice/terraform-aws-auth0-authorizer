@@ -1,5 +1,8 @@
 # AWS Auth0 Authorizer
 
+[![terraform](https://img.shields.io/github/v/tag/amancevice/terraform-aws-auth0-authorizer?color=62f&label=version&logo=terraform&style=flat-square)](https://registry.terraform.io/modules/amancevice/serverless-pypi/aws)
+[![build](https://img.shields.io/github/workflow/status/amancevice/terraform-aws-auth0-authorizer/validate?logo=github&style=flat-square)](https://github.com/amancevice/terraform-aws-auth0-authorizer/actions)
+
 Authorizer Lambda for API Gateway custom authorizers.
 
 ## Quickstart
