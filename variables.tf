@@ -32,18 +32,18 @@ variable lambda_role_name {
 
 variable lambda_role_path {
   description = "Lambda role path."
-  default     = "/"
+  default     = null
 }
 
 variable lambda_role_policy_arns {
   description = "Lambda role policy attachment ARNs."
-  type        = "list"
+  type        = list(string)
   default     = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
 }
 
 variable lambda_tags {
   description = "Lambda tags."
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
 
