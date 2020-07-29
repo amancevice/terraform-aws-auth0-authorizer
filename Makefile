@@ -1,32 +1,28 @@
-name    := auth0-authorizer
-runtime := nodejs10.x
-stages  := build test
-build   := $(shell git describe --tags --always)
-shells  := $(foreach stage,$(stages),shell@$(stage))
+REPO    := amancevice/$(shell basename $$PWD)
+RUNTIME := nodejs12.x
 
-.PHONY: all clean $(stages) $(shells)
+package.zip: package.iid package-lock.json
+	docker run --rm --entrypoint cat $$(cat $<) $@ > $@
 
-all: package-lock.json package.zip test
+package-lock.json: package.iid
+	docker run --rm --entrypoint cat $$(cat $<) $@ > $@
 
-.docker:
-	mkdir -p $@
+package.iid: index.js package.json Dockerfile
+	docker build --build-arg RUNTIME=$(RUNTIME) --iidfile $@ --tag $(REPO) .
 
-.docker/$(build)@test: .docker/$(build)@build
-.docker/$(build)@%: | .docker
-	docker build \
-	--build-arg RUNTIME=$(runtime) \
-	--iidfile $@ \
-	--tag amancevice/$(name):$(build)-$* \
-	--target $* .
+.terraform:
+	terraform init
 
-package-lock.json package.zip: .docker/$(build)@build
-	docker run --rm $(shell cat $<) cat $@ > $@
+.PHONY: clean clobber validate zip
 
 clean:
-	-docker image rm -f $(shell awk {print} .docker/*)
-	-rm -rf .docker
+	rm -rf package.iid
 
-$(stages): %: .docker/$(build)@%
+clobber: clean
+	docker image ls --quiet $(REPO) | uniq | xargs docker image rm --force
 
-$(shells): shell@%: .docker/$(build)@%
-	docker run --rm -it $(shell cat $<) /bin/bash
+validate: | .terraform
+	terraform fmt -check
+	terraform validate
+
+zip: package.zip
